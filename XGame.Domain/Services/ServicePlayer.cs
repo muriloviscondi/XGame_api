@@ -66,7 +66,34 @@ namespace XGame.Domain.Services
 
     public ChangePlayerResponse ChangePlayer(ChangePlayerRequest request)
     {
-      throw new NotImplementedException();
+      if (request == null)
+      {
+        AddNotification("ChangePlayerRequest", Message.X0_E_OBRIGATORIO.ToFormat("ChangePlayerResponse"));
+      }
+      
+      Player player = _repositoryPlayer.GetPlayerId(request.Id);
+
+      if (player == null)
+      {
+        AddNotification("id", Message.DADOS_NAO_ENCONTRADOS);
+        return null;
+      }
+
+      var name = new Name(request.FirtName, request.LastName);
+      var email = new Email(request.Email);
+
+      player.ChangePlayer(name, email, player.Status);
+
+      AddNotifications(player);
+
+      if (IsInvalid())
+      {
+        return null;
+      }
+
+      _repositoryPlayer.ChangePlayer(player);
+
+      return (ChangePlayerResponse)player;
     }
 
     public IEnumerable<PlayerResponse> ListPlayer()

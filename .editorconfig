@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1926: Error opening Win32 manifest file C:\Users\Viscondi\source\repos\XGame\XGame.Domain\Extentions\StringExtension.manifest -- Could not find a part of the path 'C:\Users\Viscondi\source\repos\XGame\XGame.Domain\Extentions\StringExtension.manifest'.
+dotnet_diagnostic.CS1926.severity = none
